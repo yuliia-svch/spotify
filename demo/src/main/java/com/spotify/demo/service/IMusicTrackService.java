@@ -22,4 +22,6 @@ public interface IMusicTrackService {
     void deleteMusicTrack(long id);
 
     void saveMusicTrack(MusicTrack musicTrack);
+
+    void sortMusicTracks(String value);
 }

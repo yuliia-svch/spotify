@@ -1,12 +1,10 @@
 package com.spotify.demo.controller;
 
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
 
 @Controller
 public class LoginController {
@@ -16,20 +14,6 @@ public class LoginController {
         return new ModelAndView("welcome");
     }
 
-
-    @GetMapping(value = { "/homePage"})
-    public ModelAndView homePage() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("homePage");
-        return model;
-    }
-
-    @GetMapping(value = {"/userPage"})
-    public ModelAndView userPage() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("userPage");
-        return model;
-    }
 
     @GetMapping(value = {"/adminPage"})
     public ModelAndView adminPage() {

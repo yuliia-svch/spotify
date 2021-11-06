@@ -2,9 +2,21 @@
 <%@ include file="common/navigation.jspf"%>
 
 <div class="container">
- <div>
-  <a type="button" class="btn btn-primary btn-md" href="/add-musicTrack">Add Music Track</a>
- </div>
+    <div>
+      <a type="button" class="btn btn-primary btn-md" href="/add-musicTrack">Add Music Track</a>
+    </div>
+    <div>
+       <form action="${pageContext.request.contextPath}/sort" method="post">
+          <input type="hidden" name="page" value="list-musicTracks">
+          <select name="option" onchange="this.form.submit();" class="form-control">
+             <option value="sort by">Sort by: </option>
+             <option value="name">name</option>
+             <option value="author">author</option>
+             <option value="year">year</option>
+             <option value="category">category</option>
+          </select>
+       </form>
+    </div>
  <br>
  <div class="panel panel-primary">
   <div class="panel-heading">
@@ -40,4 +52,5 @@
  </div>
 
 </div>
+
 <%@ include file="common/footer.jspf"%>

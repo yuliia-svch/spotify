@@ -1,7 +1,7 @@
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <html>
 <body onload='document.loginForm.username.focus();'>
-	<h3>JournalDEV Tutorials</h3>
+	<h3>Login to Spotify</h3>
 
 	<c:if test="${not empty error}"><div>${error}</div></c:if>
 	<c:if test="${not empty message}"><div>${message}</div></c:if>
@@ -24,3 +24,4 @@
 	</form>
 </body>
 </html>
+<%@ include file="common/footer.jspf"%>

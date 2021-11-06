@@ -4,3 +4,4 @@
 <a href="${pageContext.request.contextPath}/loginPage">Login</a>
 
 </div>
+<%@ include file="common/footer.jspf"%>
