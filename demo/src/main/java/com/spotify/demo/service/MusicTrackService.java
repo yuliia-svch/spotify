@@ -28,6 +28,10 @@ public class MusicTrackService implements IMusicTrackService {
     private CategoryRepository categoryRepository;
 
     public List<MusicTrack> getAllMusicTracks() {
+        return musicTrackRepository.findAll();
+    }
+
+    public List<MusicTrack> getRecentChanges() {
         if(musicTrackList.isEmpty()) {
             return musicTrackRepository.findAll();
         }

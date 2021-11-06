@@ -11,6 +11,8 @@ public interface IMusicTrackService {
 
     List<MusicTrack> getAllMusicTracks();
 
+    List<MusicTrack> getRecentChanges();
+
     List<MusicTrack> getMusicTrackByName(String name);
 
     Optional<MusicTrack> getMusicTrackById(long id);

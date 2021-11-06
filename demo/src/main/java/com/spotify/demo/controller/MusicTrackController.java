@@ -2,7 +2,6 @@ package com.spotify.demo.controller;
 
 import com.spotify.demo.converter.MusicTrackConverter;
 import com.spotify.demo.dto.MusicTrackDTO;
-import com.spotify.demo.helpers.MusicTrackSort;
 import com.spotify.demo.model.MusicTrack;
 import com.spotify.demo.service.IMusicTrackService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -43,6 +41,17 @@ public class MusicTrackController {
     public String showMusicTracks(ModelMap model) {
         model.put("musicTracks", getTracks());
         return "list-musicTracks";
+    }
+
+    @PostMapping(value = "/refresh")
+    public String refresh(ModelMap model, @ModelAttribute("page")String page) {
+        List<MusicTrack> musicTrackList = musicTrackService.getAllMusicTracks();
+        List<MusicTrackDTO> dtos = new ArrayList<>();
+        for(MusicTrack mt : musicTrackList) {
+            dtos.add(MusicTrackConverter.convert(mt));
+        }
+        model.put("musicTracks", dtos);
+        return page;
     }
 
     @GetMapping(value = "/add-musicTrack")
@@ -93,8 +102,16 @@ public class MusicTrackController {
         return "redirect:/" + page;
     }
 
+    @PostMapping(value = "/search")
+    public String search(@ModelAttribute("search")String search, @ModelAttribute("page")String page) {
+        if (search.equals(""))
+            return "redirect:/" + page;
+        musicTrackService.getMusicTrackByName(search);
+        return "redirect:/" + page;
+    }
+
     private List<MusicTrackDTO> getTracks() {
-        List<MusicTrack> list = musicTrackService.getAllMusicTracks();
+        List<MusicTrack> list = musicTrackService.getRecentChanges();
         List<MusicTrackDTO> dtos = new ArrayList<>();
         for(MusicTrack mt : list) {
             dtos.add(MusicTrackConverter.convert(mt));

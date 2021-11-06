@@ -5,28 +5,15 @@
 
 <h3>User Page</h3>
 
-<script>
-    function run(page) {
-        var select = document.getElementById('sort_params');
-        var option = select.options[select.selectedIndex].text;
-        $.ajax({
-            type: "GET",
-            url: "/sort/"+option+"/"+page,
-            dataType: "json",
-            contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function () {
-                alert("sorted");
-            }
-        });
-    }
-
-    run();
-
-</script>
-
 <div class="container">
-    <div>
+<div class = "row">
+    <div class = "col-xs-4">
+          <form action="${pageContext.request.contextPath}/refresh" method="post">
+              <input type="hidden" name="page" value="userPage">
+              <button type="submit" class="btn btn-primary btn-md">Refresh</a>
+          </form>
+    </div>
+    <div class = "col-xs-4">
         <form action="${pageContext.request.contextPath}/sort" method="post">
             <input type="hidden" name="page" value="userPage">
             <select name="option" onchange="this.form.submit();" class="form-control">
@@ -38,6 +25,14 @@
             </select>
         </form>
     </div>
+    <div class = "col-xs-4">
+            <form action="${pageContext.request.contextPath}/search" method="post">
+                <input type="hidden" name="page" value="list-musicTracks">
+                <input type="text" name="search" class="form-control"
+                        onkeydown="this.form.submit();" placeholder="Enter the name or author"/>
+            </form>
+    </div>
+</div>
  <br>
  <div class="panel panel-primary">
   <div class="panel-heading">
