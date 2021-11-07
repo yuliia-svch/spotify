@@ -2,6 +2,7 @@ package com.spotify.demo.model;
 
 import javax.persistence.*;
 import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "Author")
@@ -12,12 +13,12 @@ public class Author {
 
     private String name;
 
-    @OneToMany(mappedBy = "author")
+    @OneToMany(mappedBy = "author", fetch = FetchType.EAGER)
     private Collection<MusicTrack> musicTracks;
 
     public Author() { }
 
-    public Author(String name, Collection<MusicTrack> musicTracks) {
+    public Author(String name, List<MusicTrack> musicTracks) {
         this.name = name;
         this.musicTracks = musicTracks;
     }

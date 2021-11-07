@@ -7,7 +7,7 @@
  <div class="panel panel-primary">
      <div class="panel-heading">Home Page</div>
         <div class="panel-body">
-           Welcome!! <a href="${pageContext.request.contextPath}/list-musicTracks">Click here</a> to manage music tracks
+           Welcome!! <a href="${pageContext.request.contextPath}/list-allMusicTracks">Click here</a> to manage music tracks
         </div>
      </div>
  </div>

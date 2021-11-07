@@ -16,7 +16,7 @@ import java.util.*;
 @Service
 public class MusicTrackService implements IMusicTrackService {
 
-    private List<MusicTrack> musicTrackList = new ArrayList<>();
+    private Collection<MusicTrack> musicTrackList = new ArrayList<>();
 
     @Autowired
     private MusicTrackRepository musicTrackRepository;
@@ -31,16 +31,29 @@ public class MusicTrackService implements IMusicTrackService {
         return musicTrackRepository.findAll();
     }
 
-    public List<MusicTrack> getRecentChanges() {
+    public Collection<MusicTrack> getRecentChanges() {
         if(musicTrackList.isEmpty()) {
             return musicTrackRepository.findAll();
         }
         return musicTrackList;
     }
 
-    public List<MusicTrack> getMusicTrackByName(String name) {
+    public void getMusicTrackByName(String name) {
+        musicTrackList.clear();
         musicTrackList = musicTrackRepository.findByName(name);
-        return musicTrackList;
+    }
+
+    public void getMusicTrackByAuthor(String name) {
+        musicTrackList.clear();
+        Author auth = authorRepository.findByName(name);
+        musicTrackList = auth.getMusicTracks();
+    }
+
+    public void getMusicTrackByCriteria(String name) {
+        getMusicTrackByName(name);
+        if(musicTrackList.isEmpty()) {
+            getMusicTrackByAuthor(name);
+        }
     }
 
     public Optional<MusicTrack> getMusicTrackById(long id) {
@@ -48,31 +61,27 @@ public class MusicTrackService implements IMusicTrackService {
     }
 
     public void updateMusicTrack(MusicTrack musicTrack) {
-        Optional<Author> author = authorRepository.findById(musicTrack.getAuthor().getId());
-        Optional<Category> category = categoryRepository.findById(musicTrack.getCategory().getId());
-        if(author.isEmpty()){
-            Author auth = musicTrack.getAuthor();
-            auth.setMusicTracks(Arrays.asList(musicTrack));
-            authorRepository.save(auth);
+        Author author = authorRepository.findByName(musicTrack.getAuthor().getName());
+        Category category = categoryRepository.findByName(musicTrack.getCategory().getName());
+        if(author==null){
+            author = musicTrack.getAuthor();
+            author.setMusicTracks(List.of(musicTrack));
         } else {
-            Author auth = author.get();
-            Collection<MusicTrack> list = auth.getMusicTracks();
+            Collection<MusicTrack> list = author.getMusicTracks();
             list.add(musicTrack);
-            auth.setMusicTracks(list);
-            authorRepository.save(auth);
+            author.setMusicTracks(list);
         }
+        if(category==null){
+            category = musicTrack.getCategory();
+            category.setMusicTracks(List.of(musicTrack));
 
-        if(category.isEmpty()){
-            Category cat = musicTrack.getCategory();
-            cat.setMusicTracks(Arrays.asList(musicTrack));
-            categoryRepository.save(cat);
         } else {
-            Category cat = category.get();
-            Collection<MusicTrack> list = cat.getMusicTracks();
+            Collection<MusicTrack> list = category.getMusicTracks();
             list.add(musicTrack);
-            cat.setMusicTracks(list);
-            categoryRepository.save(cat);
+            category.setMusicTracks(list);
         }
+        categoryRepository.save(category);
+        authorRepository.save(author);
         musicTrackRepository.save(musicTrack);
     }
 
@@ -86,32 +95,29 @@ public class MusicTrackService implements IMusicTrackService {
     }
 
     public void saveMusicTrack(MusicTrack musicTrack) {
-        Optional<Author> author = authorRepository.findById(musicTrack.getAuthor().getId());
-        Optional<Category> category = categoryRepository.findById(musicTrack.getCategory().getId());
-        if(author.isEmpty()){
-            Author auth = musicTrack.getAuthor();
-            auth.setMusicTracks(Collections.singletonList(musicTrack));
-            authorRepository.save(auth);
+        Author author = authorRepository.findByName(musicTrack.getAuthor().getName());
+        Category category = categoryRepository.findByName(musicTrack.getCategory().getName());
+        if(author==null){
+            author = musicTrack.getAuthor();
+            author.setMusicTracks(List.of(musicTrack));
         } else {
-            Author auth = author.get();
-            Collection<MusicTrack> list = auth.getMusicTracks();
+            Collection<MusicTrack> list = author.getMusicTracks();
             list.add(musicTrack);
-            auth.setMusicTracks(list);
-            authorRepository.save(auth);
+            author.setMusicTracks(list);
         }
+        if(category==null){
+            category = musicTrack.getCategory();
+            category.setMusicTracks(List.of(musicTrack));
 
-        if(category.isEmpty()){
-            Category cat = musicTrack.getCategory();
-            cat.setMusicTracks(Collections.singletonList(musicTrack));
-            categoryRepository.save(cat);
         } else {
-            Category cat = category.get();
-            Collection<MusicTrack> list = cat.getMusicTracks();
+            Collection<MusicTrack> list = category.getMusicTracks();
             list.add(musicTrack);
-            cat.setMusicTracks(list);
-            categoryRepository.save(cat);
+            category.setMusicTracks(list);
         }
-
+        musicTrack.setAuthor(author);
+        musicTrack.setCategory(category);
+        categoryRepository.save(category);
+        authorRepository.save(author);
         musicTrackRepository.save(musicTrack);
     }
 

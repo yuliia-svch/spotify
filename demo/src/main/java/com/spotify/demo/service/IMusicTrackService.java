@@ -4,6 +4,7 @@ import com.spotify.demo.model.Author;
 import com.spotify.demo.model.Category;
 import com.spotify.demo.model.MusicTrack;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Optional;
 
@@ -11,9 +12,13 @@ public interface IMusicTrackService {
 
     List<MusicTrack> getAllMusicTracks();
 
-    List<MusicTrack> getRecentChanges();
+    void getMusicTrackByCriteria(String name);
 
-    List<MusicTrack> getMusicTrackByName(String name);
+    Collection<MusicTrack> getRecentChanges();
+
+    void getMusicTrackByName(String name);
+
+    void getMusicTrackByAuthor(String name);
 
     Optional<MusicTrack> getMusicTrackById(long id);
 

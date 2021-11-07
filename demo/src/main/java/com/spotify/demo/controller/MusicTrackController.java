@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Date;
 import java.util.List;
 
@@ -43,6 +44,17 @@ public class MusicTrackController {
         return "list-musicTracks";
     }
 
+    @GetMapping(value = "/list-allMusicTracks")
+    public String getAllMusicTracks(ModelMap model) {
+        List<MusicTrack> musicTrackList = musicTrackService.getAllMusicTracks();
+        List<MusicTrackDTO> dtos = new ArrayList<>();
+        for(MusicTrack mt : musicTrackList) {
+            dtos.add(MusicTrackConverter.convert(mt));
+        }
+        model.put("musicTracks", dtos);
+        return "list-musicTracks";
+    }
+
     @PostMapping(value = "/refresh")
     public String refresh(ModelMap model, @ModelAttribute("page")String page) {
         List<MusicTrack> musicTrackList = musicTrackService.getAllMusicTracks();
@@ -63,12 +75,12 @@ public class MusicTrackController {
     @GetMapping(value = "/delete-musicTrack")
     public String deleteMusicTrack(@RequestParam long id) {
         musicTrackService.deleteMusicTrack(id);
-        return "redirect:/list-musicTracks";
+        return "redirect:/list-allMusicTracks";
     }
 
     @GetMapping(value = "/update-musicTrack")
     public String showUpdateMusicTrackPage(@RequestParam long id, ModelMap model) {
-        MusicTrack musicTrack = musicTrackService.getMusicTrackById(id).get();
+        MusicTrackDTO musicTrack = MusicTrackConverter.convert(musicTrackService.getMusicTrackById(id).get());
         model.put("musicTrack", musicTrack);
         return "musicTrack";
     }
@@ -80,7 +92,7 @@ public class MusicTrackController {
         }
 
         musicTrackService.saveMusicTrack(MusicTrackConverter.convert(musicTrackDTO));
-        return "redirect:/list-musicTracks";
+        return "redirect:/list-allMusicTracks";
     }
 
     @PostMapping(value = "/update-musicTrack")
@@ -91,7 +103,7 @@ public class MusicTrackController {
         }
 
         musicTrackService.updateMusicTrack(MusicTrackConverter.convert(musicTrackDTO));
-        return "redirect:/list-musicTracks";
+        return "redirect:/list-allMusicTracks";
     }
 
     @PostMapping(value = "/sort")
@@ -106,12 +118,12 @@ public class MusicTrackController {
     public String search(@ModelAttribute("search")String search, @ModelAttribute("page")String page) {
         if (search.equals(""))
             return "redirect:/" + page;
-        musicTrackService.getMusicTrackByName(search);
+        musicTrackService.getMusicTrackByCriteria(search);
         return "redirect:/" + page;
     }
 
     private List<MusicTrackDTO> getTracks() {
-        List<MusicTrack> list = musicTrackService.getRecentChanges();
+        Collection<MusicTrack> list = musicTrackService.getRecentChanges();
         List<MusicTrackDTO> dtos = new ArrayList<>();
         for(MusicTrack mt : list) {
             dtos.add(MusicTrackConverter.convert(mt));
