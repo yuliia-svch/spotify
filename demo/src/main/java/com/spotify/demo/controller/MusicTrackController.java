@@ -106,6 +106,17 @@ public class MusicTrackController {
         return "redirect:/list-allMusicTracks";
     }
 
+    @GetMapping(value = "/seeMore")
+    public String seeMore(@RequestParam long id, ModelMap model) {
+        MusicTrackDTO musicTrack = MusicTrackConverter.convert(musicTrackService.getMusicTrackById(id).get());
+        model.put("name", musicTrack.getName());
+        model.put("author", musicTrack.getAuthor());
+        model.put("year", musicTrack.getYear());
+        model.put("category", musicTrack.getCategory());
+        model.put("text", musicTrack.getText());
+        return "seeMore";
+    }
+
     @PostMapping(value = "/sort")
     public String sort(@ModelAttribute("option")String option, @ModelAttribute("page")String page) {
         if (option.equalsIgnoreCase("Sort by: "))

@@ -1,6 +1,12 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
 
+<script>
+    function see_more(id) {
+        window.location = '/seeMore?id='+id;
+    }
+</script>
+
 <div class="container">
     <div class = "row">
         <div class = "col-xs-2">
@@ -39,7 +45,7 @@
    <h3>List of music Tracks</h3>
   </div>
   <div class="panel-body">
-   <table class="table table-striped">
+   <table class="table table-hover table-dark">
     <thead>
      <tr>
       <th width="25%">Name</th>
@@ -51,7 +57,7 @@
     </thead>
     <tbody>
      <c:forEach items="${musicTracks}" var="musicTrack">
-      <tr>
+      <tr onclick="see_more(${musicTrack.id})">
        <td>${musicTrack.name}</td>
        <td>${musicTrack.author}</td>
        <td>${musicTrack.year}</td>

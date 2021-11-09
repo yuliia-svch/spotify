@@ -21,6 +21,8 @@ public class MusicTrack {
     @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     private Category category;
 
+    private String text;
+
     public MusicTrack(){}
 
     public MusicTrack(String name, Author author, int year, Category category) {
@@ -68,5 +70,13 @@ public class MusicTrack {
 
     public void setCategory(Category category) {
         this.category = category;
+    }
+
+    public String getText() {
+        return text;
+    }
+
+    public void setText(String text) {
+        this.text = text;
     }
 }

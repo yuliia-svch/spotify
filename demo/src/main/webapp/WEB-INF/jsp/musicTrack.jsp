@@ -36,6 +36,11 @@
         <form:errors path="category" cssClass="text-warning" />
       </fieldset>
 
+      <fieldset class="form-group">
+         <form:input path="text" type="textarea" placeholder="Enter text of the song" class="form-control"/>
+         <form:errors path="text" cssClass="text-warning" />
+      </fieldset>
+
       <button type="submit" class="btn btn-success">Save</button>
      </form:form>
     </div>

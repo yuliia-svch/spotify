@@ -18,4 +18,6 @@ public class MusicTrackDTO {
     private int year;
 
     private String category;
+
+    private String text;
 }

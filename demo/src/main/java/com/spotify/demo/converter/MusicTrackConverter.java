@@ -14,6 +14,7 @@ public class MusicTrackConverter {
         musicTrackDTO.setAuthor(musicTrack.getAuthor().getName());
         musicTrackDTO.setYear(musicTrack.getYear());
         musicTrackDTO.setCategory(musicTrack.getCategory().getName());
+        musicTrackDTO.setText(musicTrack.getText());
         return musicTrackDTO;
     }
 
@@ -28,6 +29,7 @@ public class MusicTrackConverter {
         musicTrack.setAuthor(author);
         musicTrack.setYear(musicTrackDTO.getYear());
         musicTrack.setCategory(category);
+        musicTrack.setText(musicTrackDTO.getText());
         return musicTrack;
     }
 }
