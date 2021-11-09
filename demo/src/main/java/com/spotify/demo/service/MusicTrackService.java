@@ -32,9 +32,6 @@ public class MusicTrackService implements IMusicTrackService {
     }
 
     public Collection<MusicTrack> getRecentChanges() {
-        if(musicTrackList.isEmpty()) {
-            return musicTrackRepository.findAll();
-        }
         return musicTrackList;
     }
 
@@ -46,14 +43,24 @@ public class MusicTrackService implements IMusicTrackService {
     public void getMusicTrackByAuthor(String name) {
         musicTrackList.clear();
         Author auth = authorRepository.findByName(name);
-        musicTrackList = auth.getMusicTracks();
+        if(auth != null)
+            musicTrackList = auth.getMusicTracks();
+    }
+
+    public void getMusicTrackByCategory(String name) {
+        musicTrackList.clear();
+        Category cat = categoryRepository.findByName(name);
+        if(cat != null)
+            musicTrackList = cat.getMusicTracks();
     }
 
     public void getMusicTrackByCriteria(String name) {
         getMusicTrackByName(name);
-        if(musicTrackList.isEmpty()) {
+        if(musicTrackList.isEmpty())
             getMusicTrackByAuthor(name);
-        }
+
+        if(musicTrackList.isEmpty())
+            getMusicTrackByCategory(name);
     }
 
     public Optional<MusicTrack> getMusicTrackById(long id) {

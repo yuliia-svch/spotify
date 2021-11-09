@@ -3,7 +3,7 @@
 
 <script>
     function see_more(id) {
-        window.location = '/seeMore?id='+id;
+        window.location = '/seeMore?id='+id+'&page=list-allMusicTracks';
     }
 </script>
 
@@ -33,7 +33,8 @@
         <div class = "col-xs-4">
             <form action="${pageContext.request.contextPath}/search" method="post">
                 <input type="hidden" name="page" value="list-musicTracks">
-                <input type="text" name="search" class="form-control" placeholder="Enter the name or author"/>
+                <input type="text" name="search" class="form-control"
+                    placeholder="Enter the name, author or category"/>
             </form>
         </div>
     </div>
@@ -45,7 +46,7 @@
    <h3>List of music Tracks</h3>
   </div>
   <div class="panel-body">
-   <table class="table table-hover table-dark">
+   <table class="table table-hover">
     <thead>
      <tr>
       <th width="25%">Name</th>

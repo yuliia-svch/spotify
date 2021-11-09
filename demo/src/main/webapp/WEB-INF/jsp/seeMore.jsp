@@ -5,6 +5,6 @@
 <h5>${year} ${category}</h5>
 <p>${text}</p>
 
-<a href="${pageContext.request.contextPath}/list-allMusicTracks">Back</a>
+<a href="${pageContext.request.contextPath}/${page}">Back</a>
 
 <%@ include file="common/footer.jspf"%>

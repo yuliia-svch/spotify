@@ -34,35 +34,31 @@ public class MusicTrackController {
 
     @GetMapping(value = "/userPage")
     public String userPage(ModelMap model) {
-        model.put("musicTracks", getTracks());
+        model.put("musicTracks", getRecent());
+        return "userPage";
+    }
+
+    @GetMapping(value = "/userPageAll")
+    public String userPageAll(ModelMap model) {
+        model.put("musicTracks", getAll());
         return "userPage";
     }
 
     @GetMapping(value = "/list-musicTracks")
     public String showMusicTracks(ModelMap model) {
-        model.put("musicTracks", getTracks());
+        model.put("musicTracks", getRecent());
         return "list-musicTracks";
     }
 
     @GetMapping(value = "/list-allMusicTracks")
     public String getAllMusicTracks(ModelMap model) {
-        List<MusicTrack> musicTrackList = musicTrackService.getAllMusicTracks();
-        List<MusicTrackDTO> dtos = new ArrayList<>();
-        for(MusicTrack mt : musicTrackList) {
-            dtos.add(MusicTrackConverter.convert(mt));
-        }
-        model.put("musicTracks", dtos);
+        model.put("musicTracks", getAll());
         return "list-musicTracks";
     }
 
     @PostMapping(value = "/refresh")
     public String refresh(ModelMap model, @ModelAttribute("page")String page) {
-        List<MusicTrack> musicTrackList = musicTrackService.getAllMusicTracks();
-        List<MusicTrackDTO> dtos = new ArrayList<>();
-        for(MusicTrack mt : musicTrackList) {
-            dtos.add(MusicTrackConverter.convert(mt));
-        }
-        model.put("musicTracks", dtos);
+        model.put("musicTracks", getAll());
         return page;
     }
 
@@ -107,13 +103,14 @@ public class MusicTrackController {
     }
 
     @GetMapping(value = "/seeMore")
-    public String seeMore(@RequestParam long id, ModelMap model) {
+    public String seeMore(@RequestParam long id, @RequestParam String page, ModelMap model) {
         MusicTrackDTO musicTrack = MusicTrackConverter.convert(musicTrackService.getMusicTrackById(id).get());
         model.put("name", musicTrack.getName());
         model.put("author", musicTrack.getAuthor());
         model.put("year", musicTrack.getYear());
         model.put("category", musicTrack.getCategory());
         model.put("text", musicTrack.getText());
+        model.put("page", page);
         return "seeMore";
     }
 
@@ -133,8 +130,17 @@ public class MusicTrackController {
         return "redirect:/" + page;
     }
 
-    private List<MusicTrackDTO> getTracks() {
+    private List<MusicTrackDTO> getRecent() {
         Collection<MusicTrack> list = musicTrackService.getRecentChanges();
+        List<MusicTrackDTO> dtos = new ArrayList<>();
+        for(MusicTrack mt : list) {
+            dtos.add(MusicTrackConverter.convert(mt));
+        }
+        return dtos;
+    }
+
+    public List<MusicTrackDTO> getAll() {
+        Collection<MusicTrack> list = musicTrackService.getAllMusicTracks();
         List<MusicTrackDTO> dtos = new ArrayList<>();
         for(MusicTrack mt : list) {
             dtos.add(MusicTrackConverter.convert(mt));

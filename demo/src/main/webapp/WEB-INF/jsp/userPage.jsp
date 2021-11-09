@@ -1,7 +1,12 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
-<script src="http://code.jquery.com/jquery-1.8.3.js"></script>
+
+<script>
+    function see_more(id) {
+        window.location = '/seeMore?id='+id+'&page=userPageAll';
+    }
+</script>
 
 <h3>User Page</h3>
 
@@ -27,7 +32,7 @@
     </div>
     <div class = "col-xs-4">
             <form action="${pageContext.request.contextPath}/search" method="post">
-                <input type="hidden" name="page" value="list-musicTracks">
+                <input type="hidden" name="page" value="userPage">
                 <input type="text" name="search" class="form-control"
                         onkeydown="this.form.submit();" placeholder="Enter the name or author"/>
             </form>
@@ -39,7 +44,7 @@
    <h3>List of music Tracks</h3>
   </div>
   <div class="panel-body">
-   <table class="table table-striped">
+   <table class="table table-hover">
     <thead>
      <tr>
       <th width="30%">Name</th>
@@ -51,7 +56,7 @@
     </thead>
     <tbody>
      <c:forEach items="${musicTracks}" var="musicTrack">
-      <tr>
+      <tr onclick="see_more(${musicTrack.id})">
        <td>${musicTrack.name}</td>
        <td>${musicTrack.author}</td>
        <td>${musicTrack.year}</td>
