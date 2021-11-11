@@ -20,10 +20,7 @@ import java.util.Date;
 import java.util.List;
 
 @Controller
-public class MusicTrackController {
-
-    @Autowired
-    private IMusicTrackService musicTrackService;
+public class MusicTrackController extends BaseController{
 
     @InitBinder
     public void initBinder(WebDataBinder binder) {

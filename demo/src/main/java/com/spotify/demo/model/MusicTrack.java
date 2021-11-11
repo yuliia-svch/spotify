@@ -3,6 +3,7 @@ package com.spotify.demo.model;
 import org.hibernate.annotations.Cascade;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 @Table(name = "MusicTrack")
@@ -22,6 +23,9 @@ public class MusicTrack {
     private Category category;
 
     private String text;
+
+    @ManyToMany(mappedBy = "musicTrackList")
+    private List<Playlist> playlistList;
 
     public MusicTrack(){}
 

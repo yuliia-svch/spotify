@@ -1,6 +1,5 @@
 package com.spotify.demo.service;
 
-import com.spotify.demo.dto.MusicTrackDTO;
 import com.spotify.demo.helpers.MusicTrackSort;
 import com.spotify.demo.model.Author;
 import com.spotify.demo.model.Category;
