@@ -38,6 +38,11 @@ public class PlaylistController extends BaseController{
         return "all-playlists";
     }
 
+    @PostMapping(value = "/refresh-playlists")
+    public String refresh( @ModelAttribute("page")String page) {
+        return "redirect:/"+page;
+    }
+
     @GetMapping(value = "/add-playlist")
     public String showAddPlaylistPage(@ModelAttribute("page")String page, ModelMap model) {
         model.addAttribute("playlist", new Playlist());
@@ -97,5 +102,15 @@ public class PlaylistController extends BaseController{
         model.put("name", playlistService.getPlaylistById(id).get().getName());
         model.put("musicTracks", dtos);
         return "see-playlist";
+    }
+
+    @PostMapping(value = "/search-playlists")
+    public String search(@ModelAttribute("search")String search,
+                         @ModelAttribute("page")String page,
+                         ModelMap model) {
+        if (search.equals(""))
+            return page;
+        model.put("playlists", playlistService.getPlaylistByName(search));
+        return page;
     }
 }
