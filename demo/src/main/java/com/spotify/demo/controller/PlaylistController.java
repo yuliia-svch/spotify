@@ -48,7 +48,7 @@ public class PlaylistController extends BaseController{
     @GetMapping(value = "/delete-playlist")
     public String deletePlaylist(@RequestParam long id) {
         playlistService.deletePlaylist(id);
-        return "redirect:/list-allPlaylists";
+        return "redirect:/all-playlists";
     }
 
     @PostMapping(value = "/add-playlist")
@@ -76,12 +76,16 @@ public class PlaylistController extends BaseController{
 
     @GetMapping(value = "/choose-playlist")
     public String choosePlaylist(@RequestParam long id) {
-       playlistService.addTrackToPlaylist(musicTrack, id);
-       return "redirect:/see-playlist?id="+id;
+       if(playlistService.addTrackToPlaylist(musicTrack, id)) {
+           return "redirect:/see-playlist?id="+id + "&message=Track added!";
+       }
+       return "redirect:/see-playlist?id="+id+"&message=There already is such track in this playlist!";
     }
 
     @GetMapping(value = "/see-playlist")
-    public String seeMore(@RequestParam long id, ModelMap model) {
+    public String seeMore(@RequestParam long id,
+                          @RequestParam(value = "message",required = false) String message,
+                          ModelMap model) {
         Playlist playlist = playlistService.getPlaylistById(id).get();
         List<MusicTrack> list  = playlist.getMusicTrackList();
         List<MusicTrackDTO> dtos = new ArrayList<>();
@@ -89,6 +93,7 @@ public class PlaylistController extends BaseController{
             dtos.add(MusicTrackConverter.convert(mt));
         }
         model.put("id", id);
+        model.put("message", message);
         model.put("name", playlistService.getPlaylistById(id).get().getName());
         model.put("musicTracks", dtos);
         return "see-playlist";

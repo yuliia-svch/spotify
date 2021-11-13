@@ -19,7 +19,7 @@ public interface IPlaylistService {
 
     Optional<Playlist> getPlaylistById(long id);
 
-    void addTrackToPlaylist(MusicTrack musicTrack, long id);
+    boolean addTrackToPlaylist(MusicTrack musicTrack, long id);
 
     void removeTrackFromPlaylist(MusicTrack musicTrack, long id);
 

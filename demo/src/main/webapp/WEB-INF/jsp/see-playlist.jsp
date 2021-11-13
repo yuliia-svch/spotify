@@ -1,5 +1,6 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigationForUser.jspf"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 
 <script>
     function see_more(id, playlistId) {
@@ -14,6 +15,7 @@
   <div class="panel-heading">
    <h3>List of music Tracks</h3>
   </div>
+  <c:if test="${not empty message}"><div>${message}</div></c:if>
   <div class="panel-body">
    <table class="table table-hover">
     <thead>

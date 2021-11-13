@@ -36,12 +36,13 @@ public class PlaylistService implements IPlaylistService {
     }
 
     @Override
-    public void addTrackToPlaylist(MusicTrack musicTrack, long id) {
+    public boolean addTrackToPlaylist(MusicTrack musicTrack, long id) {
         Playlist current = playlistRepository.findById(id).get();
-        if(!current.getMusicTrackList().contains(musicTrack)) {
-            current.addMusicTrack(musicTrack);
+        if(current.addMusicTrack(musicTrack)) {
             playlistRepository.save(current);
+            return true;
         }
+        return false;
     }
 
     @Override
@@ -58,7 +59,8 @@ public class PlaylistService implements IPlaylistService {
 
     @Override
     public void deletePlaylist(long id) {
-        playlistRepository.delete(playlistRepository.getById(id));
+        Optional <Playlist> playlist = playlistRepository.findById(id);
+        playlist.ifPresent(playlist1 -> playlistRepository.delete(playlist1));
     }
 
     @Override

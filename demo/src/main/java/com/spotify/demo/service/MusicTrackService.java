@@ -4,9 +4,11 @@ import com.spotify.demo.helpers.MusicTrackSort;
 import com.spotify.demo.model.Author;
 import com.spotify.demo.model.Category;
 import com.spotify.demo.model.MusicTrack;
+import com.spotify.demo.model.Playlist;
 import com.spotify.demo.repository.AuthorRepository;
 import com.spotify.demo.repository.CategoryRepository;
 import com.spotify.demo.repository.MusicTrackRepository;
+import com.spotify.demo.repository.PlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +27,9 @@ public class MusicTrackService implements IMusicTrackService {
 
     @Autowired
     private CategoryRepository categoryRepository;
+
+    @Autowired
+    private PlaylistRepository playlistRepository;
 
     public List<MusicTrack> getAllMusicTracks() {
         return musicTrackRepository.findAll();
@@ -97,6 +102,13 @@ public class MusicTrackService implements IMusicTrackService {
 
     public void deleteMusicTrack(long id) {
         Optional <MusicTrack> musicTrack1 = musicTrackRepository.findById(id);
+        List<Playlist> playlists = playlistRepository.findAll();
+        if(musicTrack1.isPresent()){
+            for(Playlist pl: playlists) {
+                pl.removeMusicTrack(musicTrack1.get());
+                playlistRepository.save(pl);
+            }
+        }
         musicTrack1.ifPresent(musicTrack -> musicTrackRepository.delete(musicTrack));
     }
 

@@ -41,8 +41,8 @@
    <table class="table table-hover">
     <thead>
      <tr>
-      <th width="60%">Name</th>
-      <th width="40%"></th>
+      <th width="70%">Name</th>
+      <th width="30%"></th>
      </tr>
     </thead>
     <tbody>
@@ -50,9 +50,9 @@
       <tr>
        <td>${playlist.name}</td>
        <td><a type="button" class="btn btn-success"
-        href="/see_playlist?id=${playlist.id}">See more</a>
+            href="/see-playlist?id=${playlist.id}">See more</a>
         <a type="button" class="btn btn-warning"
-                href="/delete_playlist?id=${playlist.id}">Delete playlist</a>
+            href="/delete-playlist?id=${playlist.id}">Delete playlist</a>
        </td>
       </tr>
      </c:forEach>

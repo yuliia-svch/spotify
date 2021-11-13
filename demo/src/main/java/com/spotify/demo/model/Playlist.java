@@ -50,8 +50,14 @@ public class Playlist {
         this.musicTrackList = musicTrackList;
     }
 
-    public void addMusicTrack(MusicTrack musicTrack) {
+    public boolean addMusicTrack(MusicTrack musicTrack) {
+        for(MusicTrack mt : musicTrackList) {
+            if(mt.getId() == musicTrack.getId()) {
+                return false;
+            }
+        }
         musicTrackList.add(musicTrack);
+        return true;
     }
 
     public void removeMusicTrack(MusicTrack musicTrack) {
