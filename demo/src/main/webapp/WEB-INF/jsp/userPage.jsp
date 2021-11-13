@@ -38,6 +38,13 @@
             </form>
     </div>
 </div>
+<div = "row">
+      <form action="${pageContext.request.contextPath}/search-by-substring" method="post">
+          <input type="hidden" name="page" value="userPage">
+          <input type="text" name="search" class="form-control"
+                placeholder="Enter the part of text"/>
+      </form>
+ </div>
  <br>
  <div class="panel panel-primary">
   <div class="panel-heading">

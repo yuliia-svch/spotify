@@ -39,6 +39,13 @@
         </div>
     </div>
  <br>
+ <div = "row">
+      <form action="${pageContext.request.contextPath}/search-by-substring" method="post">
+          <input type="hidden" name="page" value="list-musicTracks">
+          <input type="text" name="search" class="form-control"
+                placeholder="Enter the part of text"/>
+      </form>
+ </div>
  <div class = "row">
  <div class = "col-md-12">
  <div class="panel panel-primary">

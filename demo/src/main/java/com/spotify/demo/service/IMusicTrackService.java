@@ -31,4 +31,6 @@ public interface IMusicTrackService {
     void saveMusicTrack(MusicTrack musicTrack);
 
     void sortMusicTracks(String value);
+
+    void searchBySubstring(String substring);
 }

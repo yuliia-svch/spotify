@@ -127,6 +127,16 @@ public class MusicTrackController extends BaseController{
         return "redirect:/" + page;
     }
 
+    @PostMapping(value = "/search-by-substring")
+    public String searchBySubstring(@ModelAttribute("search")String search,
+                                    @ModelAttribute("page")String page,
+                                    ModelMap model) {
+        if (search.equals(""))
+            return "redirect:/" + page;
+        musicTrackService.searchBySubstring(search);
+        return "redirect:/" + page;
+    }
+
     private List<MusicTrackDTO> getRecent() {
         Collection<MusicTrack> list = musicTrackService.getRecentChanges();
         List<MusicTrackDTO> dtos = new ArrayList<>();

@@ -156,4 +156,15 @@ public class MusicTrackService implements IMusicTrackService {
         }
         musicTrackList = musicTracks;
     }
+
+    public void searchBySubstring(String substring) {
+        List<MusicTrack> list = musicTrackRepository.findAll();
+        List<MusicTrack> results = new ArrayList<>();
+        for(MusicTrack mt : list) {
+            if(mt.getText().toLowerCase().contains(substring.toLowerCase())) {
+                results.add(mt);
+            }
+        }
+        musicTrackList = results;
+    }
 }
