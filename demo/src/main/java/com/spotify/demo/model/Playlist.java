@@ -21,6 +21,10 @@ public class Playlist {
             inverseJoinColumns = @JoinColumn(name = "playlist_id"))
     private List<MusicTrack> musicTrackList;
 
+    @ManyToOne
+    @JoinColumn(name="user_id", nullable=false)
+    private User user;
+
     public Playlist() {
         musicTrackList = new ArrayList<>();
     }

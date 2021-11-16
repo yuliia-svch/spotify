@@ -1,5 +1,6 @@
 package com.spotify.demo.security;
 
+import com.spotify.demo.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.web.DefaultRedirectStrategy;
@@ -12,8 +13,6 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
 
 public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHandler {
 
@@ -45,7 +44,26 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
 
     protected String determineTargetUrl(final Authentication authentication) {
 
-        Map<String, String> roleTargetUrlMap = new HashMap<>();
+        boolean isUser = false;
+        boolean isAdmin = false;
+        final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
+        for (final GrantedAuthority grantedAuthority : authorities) {
+            if (grantedAuthority.getAuthority().equals("READ_PRIVILEGE")) {
+                isUser = true;
+            } else if (grantedAuthority.getAuthority().equals("WRITE_PRIVILEGE")) {
+                isAdmin = true;
+                isUser = false;
+                break;
+            }
+        }
+        if (isUser) {
+            return "/userPageAll";
+        } else if (isAdmin) {
+            return "/adminPage";
+        } else {
+            throw new IllegalStateException();
+        }
+        /*Map<String, String> roleTargetUrlMap = new HashMap<>();
         roleTargetUrlMap.put("ROLE_USER", "/userPageAll");
         roleTargetUrlMap.put("ROLE_ADMIN", "/adminPage");
 
@@ -58,7 +76,7 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
             }
         }
 
-        throw new IllegalStateException();
+        throw new IllegalStateException();*/
     }
 
     /**

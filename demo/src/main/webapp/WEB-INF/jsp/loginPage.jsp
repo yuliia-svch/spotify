@@ -22,6 +22,7 @@
 		</table>
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 	</form>
+	<a href="${contextPath}/registerPage">Create an account</a>
 </body>
 </html>
 <%@ include file="common/footer.jspf"%>

@@ -32,9 +32,9 @@
     </div>
     <div class = "col-xs-4">
             <form action="${pageContext.request.contextPath}/search" method="post">
-                <input type="hidden" name="page" value="userPage">
-                <input type="text" name="search" class="form-control"
-                        onkeydown="this.form.submit();" placeholder="Enter the name or author"/>
+               <input type="hidden" name="page" value="userPage">
+               <input type="text" name="search" class="form-control"
+                                placeholder="Enter the name, author or category"/>
             </form>
     </div>
 </div>
