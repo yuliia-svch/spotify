@@ -39,7 +39,6 @@ public class MyUserDetailsService implements UserDetailsService {
             if (user == null) {
                 throw new UsernameNotFoundException("No user found with username: " + username);
             }
-            user.getRoles().stream().flatMap(r->r.getPrivileges().stream()).forEach(System.out::println);
             return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, getAuthorities(user.getRoles()));
         } catch (final Exception e) {
             throw new RuntimeException(e);
