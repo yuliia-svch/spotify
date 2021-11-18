@@ -36,8 +36,9 @@ public class LoginController {
 
 
     @GetMapping(value = {"/adminPage"})
-    public ModelAndView adminPage() {
+    public ModelAndView adminPage(@RequestParam(value = "username", required = false) String username) {
         ModelAndView model = new ModelAndView();
+        model.addObject("username", username);
         model.setViewName("adminPage");
         return model;
     }
@@ -82,7 +83,7 @@ public class LoginController {
             return "registerPage";
         }
         securityService.autologin(userForm.getUsername(), userForm.getPassword());
-        return "redirect:/userPageAll";
+        return "redirect:/userPageAll?username="+userForm.getUsername();
     }
 
 }

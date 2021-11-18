@@ -4,6 +4,7 @@ import com.spotify.demo.dto.UserDTO;
 import com.spotify.demo.model.Privilege;
 import com.spotify.demo.model.Role;
 import com.spotify.demo.model.User;
+import com.spotify.demo.repository.PlaylistRepository;
 import com.spotify.demo.repository.PrivilegeRepository;
 import com.spotify.demo.repository.RoleRepository;
 import com.spotify.demo.repository.UserRepository;
@@ -31,6 +32,9 @@ public class UserService implements IUserService {
 
     @Autowired
     private PrivilegeRepository privilegeRepository;
+
+    @Autowired
+    private PlaylistRepository playlistRepository;
 
     @Autowired
     private PasswordEncoder passwordEncoder;

@@ -36,7 +36,9 @@ public class MusicTrackController extends BaseController{
     }
 
     @GetMapping(value = "/userPageAll")
-    public String userPageAll(ModelMap model) {
+    public String userPageAll(@RequestParam(value = "username", required = false) String username,
+                              ModelMap model) {
+        model.put("username", username);
         model.put("musicTracks", getAll());
         return "userPage";
     }

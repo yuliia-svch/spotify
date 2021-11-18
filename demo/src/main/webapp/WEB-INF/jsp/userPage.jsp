@@ -8,9 +8,10 @@
     }
 </script>
 
-<h3>User Page</h3>
+<h2>Hey, ${username}</h2>
 
 <div class="container">
+
 <div class = "row">
     <div class = "col-xs-4">
           <form action="${pageContext.request.contextPath}/refresh" method="post">

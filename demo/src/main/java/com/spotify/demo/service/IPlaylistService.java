@@ -11,9 +11,9 @@ import java.util.Optional;
 
 public interface IPlaylistService {
 
-    List<Playlist> getAllPlaylists();
+    Collection<Playlist> getAllPlaylists();
 
-    List<Playlist> getPlaylistByName(String name);
+    Collection<Playlist> getPlaylistByName(String name);
 
     List<MusicTrack> getMusicTracksFromPlaylist(long id);
 
@@ -22,8 +22,6 @@ public interface IPlaylistService {
     boolean addTrackToPlaylist(MusicTrack musicTrack, long id);
 
     void removeTrackFromPlaylist(MusicTrack musicTrack, long id);
-
-    void addPlaylist(String name, List<MusicTrack> musicTrackList);
 
     void deletePlaylist(long id);
 

@@ -21,7 +21,7 @@ public class Playlist {
             inverseJoinColumns = @JoinColumn(name = "playlist_id"))
     private List<MusicTrack> musicTrackList;
 
-    @ManyToOne
+    @ManyToOne(cascade = {CascadeType.PERSIST, CascadeType.REFRESH, CascadeType.MERGE})
     @JoinColumn(name="user_id", nullable=false)
     private User user;
 
@@ -52,6 +52,14 @@ public class Playlist {
 
     public void setMusicTrackList(List<MusicTrack> musicTrackList) {
         this.musicTrackList = musicTrackList;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public boolean addMusicTrack(MusicTrack musicTrack) {

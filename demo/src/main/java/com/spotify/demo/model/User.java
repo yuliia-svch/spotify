@@ -74,4 +74,14 @@ public class User {
     public void setEnabled(boolean enabled) {
         this.enabled = enabled;
     }
+
+    public void addPlaylist(Playlist playlist) {
+        if(!playlists.contains(playlist)) {
+            playlists.add(playlist);
+        }
+    }
+
+    public void removePlaylist(Playlist playlist) {
+        playlists.remove(playlist);
+    }
 }

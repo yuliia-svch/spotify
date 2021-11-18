@@ -1,6 +1,6 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
-<h3>Admin Page</h3>
+<h2>Hey, ${username}</h2>
 
 <a href="${pageContext.request.contextPath}/userPage">Work as user</a>
 

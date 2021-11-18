@@ -3,6 +3,8 @@ package com.spotify.demo.security;
 import com.spotify.demo.model.User;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.DefaultRedirectStrategy;
 import org.springframework.security.web.RedirectStrategy;
 import org.springframework.security.web.WebAttributes;
@@ -56,27 +58,21 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
                 break;
             }
         }
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String username;
+        if (principal instanceof UserDetails) {
+            username = ((UserDetails)principal).getUsername();
+        } else {
+            username = principal.toString();
+        }
         if (isUser) {
-            return "/userPageAll";
+            return "/userPageAll?username="+username;
         } else if (isAdmin) {
-            return "/adminPage";
+            return "/adminPage?username="+username;
         } else {
             throw new IllegalStateException();
         }
-        /*Map<String, String> roleTargetUrlMap = new HashMap<>();
-        roleTargetUrlMap.put("ROLE_USER", "/userPageAll");
-        roleTargetUrlMap.put("ROLE_ADMIN", "/adminPage");
 
-        final Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
-        for (final GrantedAuthority grantedAuthority : authorities) {
-
-            String authorityName = grantedAuthority.getAuthority();
-            if(roleTargetUrlMap.containsKey(authorityName)) {
-                return roleTargetUrlMap.get(authorityName);
-            }
-        }
-
-        throw new IllegalStateException();*/
     }
 
     /**
