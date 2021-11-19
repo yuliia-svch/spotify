@@ -8,34 +8,41 @@
     <div class="panel-body">
      <form:form method="post" modelAttribute="musicTrack">
       <form:hidden path="id" />
-      <fieldset class="form-group">
+      <spring:bind path="name">
+      <div class="form-group ${status.error ? 'has-error' : ''}">
        <form:label path="name">Name</form:label>
        <form:input path="name" type="text" class="form-control"
         required="required" />
        <form:errors path="name" cssClass="text-warning" />
-      </fieldset>
+      </div>
+    </spring:bind>
 
-      <fieldset class="form-group">
+      <spring:bind path="author">
+      <div class="form-group ${status.error ? 'has-error' : ''}">
        <form:label path="author">Author</form:label>
        <form:input path="author" type="text" class="form-control"
         required="required" />
        <form:errors path="author" cssClass="text-warning" />
-      </fieldset>
+      </div>
+    </spring:bind>
 
-      <fieldset class="form-group">
+        <spring:bind path="year">
+      <div class="form-group ${status.error ? 'has-error' : ''}">
        <form:label path="year">Year</form:label>
        <form:input path="year" type="number" class="form-control"
-        required="required" />
+        required="required" min="1600" max="2021"/>
        <form:errors path="year" cssClass="text-warning" />
-      </fieldset>
+      </div>
+    </spring:bind>
 
-      <fieldset class="form-group">
+    <spring:bind path="category">
+      <div class="form-group ${status.error ? 'has-error' : ''}">
         <form:label path="category">Category</form:label>
         <form:input path="category" type="text" class="form-control"
         required="required" />
         <form:errors path="category" cssClass="text-warning" />
-      </fieldset>
-
+      </div>
+    </spring:bind>
       <fieldset class="form-group">
          <form:input path="text" type="textarea" placeholder="Enter text of the song" class="form-control"/>
          <form:errors path="text" cssClass="text-warning" />

@@ -1,23 +1,11 @@
 package com.spotify.demo.dto;
 
-import com.spotify.demo.validation.ValidPassword;
-import com.spotify.demo.validation.ValidUsername;
-
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-
 public class UserDTO {
 
-    @ValidPassword
     private String password;
 
-    @NotNull
-    @Size(min = 1)
     private String matchingPassword;
 
-    @ValidUsername
-    @NotNull
-    @Size(min = 1, message = "{Size.userDto.email}")
     private String username;
 
     private Integer role;

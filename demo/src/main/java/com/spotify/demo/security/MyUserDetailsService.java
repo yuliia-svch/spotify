@@ -34,15 +34,12 @@ public class MyUserDetailsService implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(final String username) throws UsernameNotFoundException {
 
-        try {
-            final User user = userRepository.findByUsername(username);
-            if (user == null) {
-                throw new UsernameNotFoundException("No user found with username: " + username);
-            }
-            return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(), user.isEnabled(), true, true, true, getAuthorities(user.getRoles()));
-        } catch (final Exception e) {
-            throw new RuntimeException(e);
-        }
+       final User user = userRepository.findByUsername(username);
+       if (user == null) throw new UsernameNotFoundException(username);
+       return new org.springframework.security.core.userdetails.User(user.getUsername(),
+               user.getPassword(), user.isEnabled(), true, true,
+               true, getAuthorities(user.getRoles()));
+
     }
 
     // UTIL

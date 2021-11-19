@@ -4,8 +4,10 @@ import com.spotify.demo.dto.UserDTO;
 import com.spotify.demo.model.User;
 import com.spotify.demo.security.SecurityService;
 import com.spotify.demo.service.IUserService;
+import com.spotify.demo.validation.UserValidator;
 import com.spotify.demo.web.UserAlreadyExistsException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
@@ -28,6 +30,9 @@ public class LoginController {
 
     @Autowired
     private SecurityService securityService;
+
+    @Autowired
+    private UserValidator userValidator;
 
     @GetMapping(value = "/")
     public ModelAndView showWelcomePage() {
@@ -71,6 +76,7 @@ public class LoginController {
     public String registration(@ModelAttribute("user") @Valid final UserDTO userForm,
                                BindingResult bindingResult,
                                ModelMap map) {
+        userValidator.validate(userForm, bindingResult);
         if (bindingResult.hasErrors()) {
             map.put("user", userForm);
             return "registerPage";
@@ -83,6 +89,7 @@ public class LoginController {
             return "registerPage";
         }
         securityService.autologin(userForm.getUsername(), userForm.getPassword());
+
         return "redirect:/userPageAll?username="+userForm.getUsername();
     }
 

@@ -70,7 +70,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginPage("/loginPage")
                 .successHandler(myAuthenticationSuccessHandler())
                 .failureUrl("/loginPage?error")
-               // .usernameParameter("username").passwordParameter("password")
                 .permitAll()
                 .and()
                 .logout().logoutSuccessUrl("/loginPage?logout");

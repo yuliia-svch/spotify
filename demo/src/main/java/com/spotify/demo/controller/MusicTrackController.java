@@ -3,7 +3,6 @@ package com.spotify.demo.controller;
 import com.spotify.demo.converter.MusicTrackConverter;
 import com.spotify.demo.dto.MusicTrackDTO;
 import com.spotify.demo.model.MusicTrack;
-import com.spotify.demo.service.IMusicTrackService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
@@ -81,8 +80,9 @@ public class MusicTrackController extends BaseController{
     }
 
     @PostMapping(value = "/add-musicTrack")
-    public String addMusicTrack(@Valid MusicTrackDTO musicTrackDTO, BindingResult result) {
+    public String addMusicTrack(@Valid MusicTrackDTO musicTrackDTO, BindingResult result, ModelMap map) {
         if (result.hasErrors()) {
+            map.put("musicTrack", musicTrackDTO);
             return "musicTrack";
         }
 
@@ -91,9 +91,9 @@ public class MusicTrackController extends BaseController{
     }
 
     @PostMapping(value = "/update-musicTrack")
-    public String updateMusicTrack(@Valid MusicTrackDTO musicTrackDTO, BindingResult result) {
-
+    public String updateMusicTrack(@Valid MusicTrackDTO musicTrackDTO, BindingResult result, ModelMap map) {
         if (result.hasErrors()) {
+            map.put("musicTrack", musicTrackDTO);
             return "musicTrack";
         }
 

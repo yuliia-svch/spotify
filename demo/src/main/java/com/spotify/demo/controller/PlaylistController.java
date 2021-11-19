@@ -57,8 +57,10 @@ public class PlaylistController extends BaseController{
     }
 
     @PostMapping(value = "/add-playlist")
-    public String addPlaylist(@Valid Playlist playlist, @ModelAttribute("page")String page, BindingResult result) {
+    public String addPlaylist(@Valid Playlist playlist, @ModelAttribute("page")String page,
+                              BindingResult result, ModelMap map) {
         if (result.hasErrors()) {
+            map.put("playlist", playlist);
             return "newPlaylist";
         }
         playlistService.savePlaylist(playlist);

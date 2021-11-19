@@ -9,7 +9,7 @@
      <form:form method="post" modelAttribute="playlist">
       <form:hidden path="id" />
       <input type="hidden" name="page" value=${page}>
-      <fieldset class="form-group">
+      <fieldset class="form-group ${status.error ? 'has-error' : ''}">
        <form:label path="name">Name</form:label>
        <form:input path="name" type="text" class="form-control"
         required="required" />
