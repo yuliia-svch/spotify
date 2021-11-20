@@ -1,13 +1,6 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigationForUser.jspf"%>
 
-<script>
-    function see_playlist(id) {
-            window.location = '/see-playlist?id='+id;
-    }
-</script>
-
-
 <div class="container">
     <div class = "row">
         <div class = "col-xs-4">

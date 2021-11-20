@@ -35,6 +35,7 @@ public class PlaylistController extends BaseController{
     @GetMapping(value = "/all-playlists")
     public String showAllPlaylists(ModelMap model) {
         model.put("playlists", playlistService.getAllPlaylists());
+        model.put("activePlaylists", "active");
         return "all-playlists";
     }
 

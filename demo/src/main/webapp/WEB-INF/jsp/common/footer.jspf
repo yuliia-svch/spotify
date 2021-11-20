@@ -12,6 +12,21 @@
     height: 100px;
     text-align: center;
 }
+              #topheader .navbar-nav li > a {
+                  text-transform: capitalize;
+                  color: #333;
+                  -webkit-transition: background-color .2s, color .2s;
+                  transition: background-color .2s, color .2s;
+              }
+              #topheader .navbar-nav li > a:hover,
+              #topheader .navbar-nav li > a:focus {
+                  background-color: #005596;
+                  color: #fff;
+              }
+              #topheader .navbar-nav li.active > a {
+                  background-color: #3990E0;
+                  color: white;
+              }
 </style>
 <div class="footer">
     <div class="d-flex row h-90 justify-content-between">
@@ -21,6 +36,7 @@
     </div>
 
 </div>
+
 </body>
 
 </html>

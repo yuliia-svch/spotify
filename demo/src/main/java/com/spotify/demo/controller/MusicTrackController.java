@@ -37,6 +37,7 @@ public class MusicTrackController extends BaseController{
 
     @GetMapping(value = "/userPageAll")
     public String userPageAll(ModelMap model) {
+        model.put("activeHome", "active");
         model.put("musicTracks", getAll());
         return "userPage";
     }
