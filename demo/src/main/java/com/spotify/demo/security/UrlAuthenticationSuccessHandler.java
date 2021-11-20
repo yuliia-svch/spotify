@@ -66,9 +66,9 @@ public class UrlAuthenticationSuccessHandler implements AuthenticationSuccessHan
             username = principal.toString();
         }
         if (isUser) {
-            return "/userPageAll?username="+username;
+            return "/userPageAll";
         } else if (isAdmin) {
-            return "/adminPage?username="+username;
+            return "/adminPage";
         } else {
             throw new IllegalStateException();
         }

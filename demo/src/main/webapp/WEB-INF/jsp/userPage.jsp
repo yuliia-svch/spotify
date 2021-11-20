@@ -8,8 +8,6 @@
     }
 </script>
 
-<h2>Hey, ${username}</h2>
-
 <div class="container">
 
 <div class = "row">

@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
 
 import javax.validation.Valid;
 import java.text.SimpleDateFormat;
@@ -35,23 +36,29 @@ public class MusicTrackController extends BaseController{
     }
 
     @GetMapping(value = "/userPageAll")
-    public String userPageAll(@RequestParam(value = "username", required = false) String username,
-                              ModelMap model) {
-        model.put("username", username);
+    public String userPageAll(ModelMap model) {
         model.put("musicTracks", getAll());
         return "userPage";
     }
 
-    @GetMapping(value = "/list-musicTracks")
-    public String showMusicTracks(ModelMap model) {
-        model.put("musicTracks", getRecent());
-        return "list-musicTracks";
+    @GetMapping(value = {"/adminPage"})
+    public ModelAndView adminPage() {
+        ModelAndView model = new ModelAndView();
+        model.addObject("musicTracks", getRecent());
+        model.setViewName("adminPage");
+        return model;
     }
+
+//    @GetMapping(value = "/list-musicTracks")
+//    public String showMusicTracks(ModelMap model) {
+//        model.put("musicTracks", getRecent());
+//        return "list-musicTracks";
+//    }
 
     @GetMapping(value = "/list-allMusicTracks")
     public String getAllMusicTracks(ModelMap model) {
         model.put("musicTracks", getAll());
-        return "list-musicTracks";
+        return "adminPage";
     }
 
     @PostMapping(value = "/refresh")

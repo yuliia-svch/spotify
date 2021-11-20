@@ -40,14 +40,6 @@ public class LoginController {
     }
 
 
-    @GetMapping(value = {"/adminPage"})
-    public ModelAndView adminPage(@RequestParam(value = "username", required = false) String username) {
-        ModelAndView model = new ModelAndView();
-        model.addObject("username", username);
-        model.setViewName("adminPage");
-        return model;
-    }
-
     @GetMapping(value = "/loginPage")
     public ModelAndView loginPage(@RequestParam(value = "error", required = false) String error,
                                   @RequestParam(value = "logout", required = false) String logout) {
@@ -90,7 +82,7 @@ public class LoginController {
         }
         securityService.autologin(userForm.getUsername(), userForm.getPassword());
 
-        return "redirect:/userPageAll?username="+userForm.getUsername();
+        return "redirect:/userPageAll";
     }
 
 }

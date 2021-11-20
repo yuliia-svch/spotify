@@ -61,7 +61,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/", "/login", "/h2-console/**", "/registerPage",
                         "/registerSuccess").permitAll()
-                .antMatchers("/userPage*", "/list-musicTracks*", "/search*", "/sort*",
+                .antMatchers("/userPage*", "/search*", "/sort*",
                         "/search-by-substring*", "/list-allMusicTracks*").hasAuthority("READ_PRIVILEGE")
                 .antMatchers("/adminPage").hasAuthority("WRITE_PRIVILEGE")
                 .anyRequest().authenticated()
