@@ -15,7 +15,7 @@
   <div class="panel-heading">
    <h3>List of music Tracks</h3>
   </div>
-  <c:if test="${not empty message}"><div>${message}</div></c:if>
+  <c:if test="${not empty message}"><div style="color:blue;">${message}</div></c:if>
   <div class="panel-body">
    <table class="table table-hover">
     <thead>

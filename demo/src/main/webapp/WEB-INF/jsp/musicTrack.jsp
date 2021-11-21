@@ -44,7 +44,9 @@
       </div>
     </spring:bind>
       <fieldset class="form-group">
-         <form:input path="text" type="textarea" placeholder="Enter text of the song" class="form-control"/>
+         <form:textarea path="text" cols="30" rows="7"
+         style="resize: both;"
+         placeholder="Enter text of the song" class="form-control"/>
          <form:errors path="text" cssClass="text-warning" />
       </fieldset>
 

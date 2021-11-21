@@ -7,9 +7,9 @@
     left: 0;
     bottom: 0;
     width: 100%;
-    background-color: black;
+    background-color: grey;
     color: white;
-    height: 100px;
+    height: 60px;
     text-align: center;
 }
               #topheader .navbar-nav li > a {
@@ -29,7 +29,7 @@
               }
 </style>
 <div class="footer">
-    <div class="d-flex row h-90 justify-content-between">
+    <div class="d-flex row w-100 justify-content-around">
         <div>Yuliia Savchenko</div>
         <div>savchenko.julia21@gmail.com</div>
         <div>+380931403991</div>

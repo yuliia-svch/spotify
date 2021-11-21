@@ -161,8 +161,10 @@ public class MusicTrackService implements IMusicTrackService {
         List<MusicTrack> list = musicTrackRepository.findAll();
         List<MusicTrack> results = new ArrayList<>();
         for(MusicTrack mt : list) {
-            if(mt.getText().toLowerCase().contains(substring.toLowerCase())) {
-                results.add(mt);
+            if(mt.getText() != null) {
+                if (mt.getText().toLowerCase().contains(substring.toLowerCase())) {
+                    results.add(mt);
+                }
             }
         }
         musicTrackList = results;

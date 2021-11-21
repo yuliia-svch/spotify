@@ -1,7 +1,9 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
 
+<div style="margin-left: 123em">
 <a href="${pageContext.request.contextPath}/userPageAll">Work as user</a>
+</div>
 
 <script>
     function see_more(id) {
