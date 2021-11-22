@@ -91,8 +91,10 @@ public class MusicTrackService implements IMusicTrackService {
             list.add(musicTrack);
             category.setMusicTracks(list);
         }
-        categoryRepository.save(category);
-        authorRepository.save(author);
+        musicTrack.setAuthor(author);
+        musicTrack.setCategory(category);
+//        categoryRepository.save(category);
+//        authorRepository.save(author);
         musicTrackRepository.save(musicTrack);
     }
 
@@ -134,8 +136,8 @@ public class MusicTrackService implements IMusicTrackService {
         }
         musicTrack.setAuthor(author);
         musicTrack.setCategory(category);
-        categoryRepository.save(category);
-        authorRepository.save(author);
+//        categoryRepository.save(category);
+//        authorRepository.save(author);
         musicTrackRepository.save(musicTrack);
     }
 
