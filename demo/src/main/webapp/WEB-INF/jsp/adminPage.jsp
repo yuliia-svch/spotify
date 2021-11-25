@@ -1,9 +1,6 @@
 <%@ include file="common/header.jspf"%>
 <%@ include file="common/navigation.jspf"%>
 
-<div style="margin-left: 123em">
-<a href="${pageContext.request.contextPath}/userPageAll">Work as user</a>
-</div>
 
 <script>
     function see_more(id) {
@@ -12,6 +9,9 @@
 </script>
 
 <div class="container">
+<a href="${pageContext.request.contextPath}/userPageAll">Work as user</a>
+<br/>
+<br/>
     <div class = "row">
         <div class = "col-xs-2">
           <a type="button" class="btn btn-primary btn-md" href="/add-musicTrack">Add Music Track</a>

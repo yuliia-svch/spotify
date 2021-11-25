@@ -36,7 +36,7 @@ public class LoginController {
 
     @GetMapping(value = "/")
     public ModelAndView showWelcomePage() {
-        return new ModelAndView("welcome");
+        return new ModelAndView("index");
     }
 
 
